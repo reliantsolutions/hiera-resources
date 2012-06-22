@@ -1,7 +1,7 @@
 Setup for both YAML and Redis use cases
 =======================================
 
-1. Create ~/.puppet/hiera.yaml
+Create ~/.puppet/hiera.yaml
 
 <pre>
 ---
@@ -19,7 +19,7 @@ Setup for both YAML and Redis use cases
   :port: 6379
 </pre>
 
-2. Create /tmp/hiera/data/common.yaml
+Create /tmp/hiera/data/common.yaml
 
 <pre>
 ---
@@ -32,7 +32,7 @@ messages:
     message: this is the third resource stored in YAML
 </pre>
 
-3. Create a dummy module
+Create a dummy module
 
 <pre>
 $ FUNCTION_DIR=/tmp/modules/lib/puppet/parser/functions
@@ -40,7 +40,7 @@ $ mkdir -p $FUNCTION_DIR
 $ cp hiera_resources*.rb $FUNCTION_DIR
 </pre>
 
-Creating resources from a YAML backend
+Creating resources from the YAML backend
 ======================================
 
 Create a simple puppet manifest
@@ -53,7 +53,7 @@ Now apply the manifest
 $ sudo puppet apply --modulepath=/tmp/modules /tmp/yaml.pp
 </pre>
 
-Creating resources from a Redis backend
+Creating resources from the Redis backend
 =======================================
 
 Make sure Redis is running on localhost:6379
