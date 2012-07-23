@@ -9,7 +9,7 @@ Create ~/.puppet/hiera.yaml
   - common
 
 :backends:
-: - yaml
+  - yaml
   - redis
 
 :yaml:
