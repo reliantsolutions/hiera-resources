@@ -65,9 +65,9 @@ sadd common:messages2 'message 1' 'message 2' 'message 3'
 sadd 'common:messages2:message 1' message
 sadd 'common:messages2:message 2' message
 sadd 'common:messages2:message 3' message
-sadd 'common:messages2:message 1:message 'This is the first resource stored in Redis'
-sadd 'common:messages2:message 2:message 'This is the second resource stored in Redis''
-sadd 'common:messages2:message 3:message 'This is the third resource stored in Redis'
+sadd 'common:messages2:message 1:message' 'This is the first resource stored in Redis'
+sadd 'common:messages2:message 2:message' 'This is the second resource stored in Redis'
+sadd 'common:messages2:message 3:message' 'This is the third resource stored in Redis'
 </pre>
 
 Create a simple puppet manifest
