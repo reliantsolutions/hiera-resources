@@ -16,37 +16,34 @@ Ensure the following gem versions are installed:
   - hiera-puppet >= 1.0.0
   - hiera-redis >= 1.0.0 (coming soon...)
 
-Create a Hiera configuration
+Create a Hiera configuration in ~/.puppet/hiera.yaml
 
 <pre>
-<code>
-cat <<EOF > ~/.puppet/hiera.yaml
-> ---
-> :hierarchy:
->   - common
-> :backends:
->   - yaml
->   - redis
-> :yaml:
->   :datadir: /tmp/hiera/data
-> EOF
-</code>
+---
+:hierarchy:
+  - common
+:backends:
+  - yaml
+  - redis
+:yaml:
+  :datadir: /tmp/hiera/data
 </pre>
-
-Create some data for the YAML backend
 
 <pre>
 mkdir -p /tmp/hiera/data
-cat <<EOF > /tmp/hiera/data/common.yaml
-> ---
-> messages1:
->   resource title 1:
->     message: this is the first message stored in YAML
->   resource title 2:
->     message: this is the second message stored in YAML
->   resource title 3:
->     message: this is the third message stored in YAML
-> EOF
+</pre>
+
+Create some YAML data in /tmp/hiera/data/common.yaml
+
+<pre>
+---
+messages1:
+  resource title 1:
+    message: this is the first message stored in YAML
+  resource title 2:
+    message: this is the second message stored in YAML
+  resource title 3:
+    message: this is the third message stored in YAML
 </pre>
 
 Creating Puppet resources from the YAML backend
@@ -86,12 +83,8 @@ r.set 'common:messages2', messages.to_json
 Configure deserialization in Hiera's configuration file. Use :yaml if
 appropriate.
 <pre>
-<code>
-cat <<EOF >> ~/.puppet/hiera.yaml
-> :redis:
->   :deserialize: :json
-> EOF
-</code>
+:redis:
+  :deserialize: :json
 </pre>
 
 Create a simple Puppet manifest
