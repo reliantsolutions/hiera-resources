@@ -80,8 +80,8 @@ r = Redis.new
 r.set 'common:messages2', messages.to_json
 </pre>
 
-Configure deserialization in Hiera's configuration file. Use :yaml if
-appropriate.
+Configure deserialization in ~/.puppet/hiera.yaml (use :yaml instead of
+:json if appropriate).
 <pre>
 :redis:
   :deserialize: :json
