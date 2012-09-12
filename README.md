@@ -1,13 +1,13 @@
 Overview
 ========
 
-The hiera_resources function has 1 job in life; create puppet resources from a hash returned by Hiera
+hiera_resources has 1 job in life; create puppet resources from a hash returned by Hiera
 
-This documentation will cover using the function with 2 Hiera backends:
+This document will cover using the function with 2 Hiera backends:
   - yaml
-  - redis (hashes must be serialized with JSON and stored as strings)
+  - redis (hashes must be serialized using JSON or YAML)
 
-Setup for both YAML and Redis use cases
+Setup for both YAML and Redis backends
 =======================================
 
 Ensure the following gem versions are installed:
@@ -28,8 +28,6 @@ cat <<EOF > ~/.puppet/hiera.yaml
 >   - redis
 > :yaml:
 >   :datadir: /tmp/hiera/data
-> :redis:
->   :json: true
 > EOF
 </pre>
 
@@ -49,7 +47,7 @@ cat <<EOF > /tmp/hiera/data/common.yaml
 > EOF
 </pre>
 
-Creating resources from the YAML backend
+Creating Puppet resources from the YAML backend
 ======================================
 
 Create a simple puppet manifest
@@ -62,7 +60,7 @@ Now apply the manifest
 $ puppet apply /tmp/yaml.pp
 </pre>
 
-Creating resources from the Redis backend
+Creating Puppet resources from the Redis backend
 =======================================
 
 Make sure Redis is running on localhost:6379
@@ -83,7 +81,16 @@ r = Redis.new
 r.set 'common:messages2', messages.to_json
 </pre>
 
-Create a simple puppet manifest
+Configure deserialization in Hiera's configuration file. Use :yaml if
+appropriate.
+<pre>
+cat <<EOF >> ~/.puppet/hiera.yaml
+> :redis:
+>   :deserialize: :json
+> EOF
+</pre>
+
+Create a simple Puppet manifest
 
 <pre>
 $ echo "hiera_resources_redis('notify', 'messages2')" > /tmp/redis.pp
