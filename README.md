@@ -19,6 +19,7 @@ Ensure the following gem versions are installed:
 Create a Hiera configuration
 
 <pre>
+<code>
 cat <<EOF > ~/.puppet/hiera.yaml
 > ---
 > :hierarchy:
@@ -29,6 +30,7 @@ cat <<EOF > ~/.puppet/hiera.yaml
 > :yaml:
 >   :datadir: /tmp/hiera/data
 > EOF
+</code>
 </pre>
 
 Create some data for the YAML backend
@@ -84,10 +86,12 @@ r.set 'common:messages2', messages.to_json
 Configure deserialization in Hiera's configuration file. Use :yaml if
 appropriate.
 <pre>
+<code>
 cat <<EOF >> ~/.puppet/hiera.yaml
 > :redis:
 >   :deserialize: :json
 > EOF
+</code>
 </pre>
 
 Create a simple Puppet manifest
