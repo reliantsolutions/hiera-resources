@@ -1,7 +1,7 @@
 # Usage examples:
-#   hiera_resources('notice', 'messages')
-# a default can be used if the 2nd argument can not be found
-#   hiera_resources('notice', 'not_found', $default)
+#   hiera_resources('key')
+# a default can be specified which is used when the key is not found
+#   hiera_resources('missing_key', $default)
 Puppet::Parser::Functions.newfunction(:hiera_resources) do |args|
 
   raise Puppet::Error, "hiera_resources requires 2 arguments; got %s" % args.length unless args.length >= 2
