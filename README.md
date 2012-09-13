@@ -54,13 +54,15 @@ messages1:
 Creating Puppet resources from the YAML backend
 ======================================
 
-Create a simple puppet manifest
+Apply a manifest
 
-    $ echo "hiera_resources('messages1')" > /tmp/yaml.pp
-
-Now apply the manifest
-
-    $ puppet apply /tmp/yaml.pp
+<code>
+$ puppet apply -e "hiera_resources('messages1')"
+notice: This is the second message stored in YAML.
+notice: /Stage[main]//Notify[title 2]/message: defined 'message' as 'This is the second message stored in YAML.'
+notice: This is the first message stored in YAML.
+notice: /Stage[main]//Notify[title 1]/message: defined 'message' as 'This is the first message stored in YAML.'
+</code>
 
 Creating Puppet resources from the Redis backend
 =======================================
@@ -95,13 +97,15 @@ Configure deserialization in ~/.puppet/hiera.yaml (use :yaml instead of
   :deserialize: :json
 </pre>
 
-Create a simple Puppet manifest
+Now apply a manifest
 
-    $ echo "hiera_resources_redis('messages2')" > /tmp/redis.pp
-
-Now apply the manifest
-
-    $ puppet apply /tmp/redis.pp
+<code>
+$ puppet apply -e "hiera_resources('messages2')"
+notice: This is the second message stored in Redis.
+notice: /Stage[main]//Notify[title 2]/message: defined 'message' as 'This is the second message stored in Redis.'
+notice: This is the first message stored in Redis.
+notice: /Stage[main]//Notify[title 1]/message: defined 'message' as 'This is the first message stored in Redis.'
+</code>
 
 Additional features
 ===================
