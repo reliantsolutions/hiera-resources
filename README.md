@@ -24,6 +24,10 @@ Ensure the following gem versions are installed:
   - hiera-puppet >= 1.0.0
   - hiera-redis >= 1.0.0 (coming soon...)
 
+This function should exist in a place where puppet can find it.
+~/.puppet/var/lib/puppet/parser/functions is certainly fine for testing
+purposes.
+
 Create a Hiera configuration in ~/.puppet/hiera.yaml
 
 <pre>
