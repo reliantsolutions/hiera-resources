@@ -26,7 +26,7 @@ Ensure the following gem versions are installed:
 
 Create a Hiera configuration in ~/.puppet/hiera.yaml
 
-<code>
+<pre>
 ---
 :hierarchy:
   - common
@@ -35,15 +35,13 @@ Create a Hiera configuration in ~/.puppet/hiera.yaml
   - redis
 :yaml:
   :datadir: /tmp/hiera/data
-</code>
-
-<pre>
-$ mkdir -p /tmp/hiera/data
 </pre>
+
+    $ mkdir -p /tmp/hiera/data
 
 Create some YAML data in /tmp/hiera/data/common.yaml
 
-<code>
+<pre>
 ---
 messages1:
   notify:
@@ -53,20 +51,16 @@ messages1:
       message: this is the second message stored in YAML
     title 3:
       message: this is the third message stored in YAML
-</code>
+</pre>
 
 Creating Puppet resources from the YAML backend
 ======================================
 
 Create a simple puppet manifest
-<pre>
-$ echo "hiera_resources('messages1')" > /tmp/yaml.pp
-</pre>
+    $ echo "hiera_resources('messages1')" > /tmp/yaml.pp
 
 Now apply the manifest
-<pre>
-$ puppet apply /tmp/yaml.pp
-</pre>
+    $ puppet apply /tmp/yaml.pp
 
 Creating Puppet resources from the Redis backend
 =======================================
@@ -96,22 +90,16 @@ r.set 'common:messages2', resources.to_json
 
 Configure deserialization in ~/.puppet/hiera.yaml (use :yaml instead of
 :json if appropriate).
-<code>
+<pre>
 :redis:
   :deserialize: :json
-</code>
+</pre>
 
 Create a simple Puppet manifest
-
-<pre>
-$ echo "hiera_resources_redis('messages2')" > /tmp/redis.pp
-</pre>
+    $ echo "hiera_resources_redis('messages2')" > /tmp/redis.pp
 
 Now apply the manifest
-
-<pre>
-$ puppet apply /tmp/redis.pp
-</pre>
+    $ puppet apply /tmp/redis.pp
 
 Additional features
 ===================
