@@ -71,7 +71,8 @@ notice: /Stage[main]//Notify[title 1]/message: defined 'message' as 'This is the
 Creating Puppet resources from the Redis backend
 =======================================
 
-Make sure Redis is running on localhost:6379
+Make sure Redis is running on localhost:6379 (or tweak the call to
+Redis.new below)
 
 Fire up your favorite ruby REPL and a few serialized Puppet resources
 into a Redis key.
