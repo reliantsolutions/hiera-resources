@@ -1,11 +1,19 @@
 Overview
 ========
 
-hiera_resources has 1 job in life; create puppet resources from a hash returned by Hiera
+hiera_resources has 1 job in life; create Puppet resources from a hash returned by Hiera
 
-This document will cover using the function with 2 Hiera backends:
+This document will cover using this function with 2 Hiera backends:
   - yaml
   - redis (hashes must be serialized using JSON or YAML)
+
+Credit
+======
+
+This version of hiera_resources is basically a complete refactoring
+based on this excellent blog post by Robin Bowes.
+
+http://yo61.com/assigning-resources-to-nodes-with-hiera-in-puppet.html
 
 Setup for both YAML and Redis backends
 =======================================
@@ -18,7 +26,7 @@ Ensure the following gem versions are installed:
 
 Create a Hiera configuration in ~/.puppet/hiera.yaml
 
-<pre>
+<code>
 ---
 :hierarchy:
   - common
@@ -27,31 +35,32 @@ Create a Hiera configuration in ~/.puppet/hiera.yaml
   - redis
 :yaml:
   :datadir: /tmp/hiera/data
-</pre>
+</code>
 
 <pre>
-mkdir -p /tmp/hiera/data
+$ mkdir -p /tmp/hiera/data
 </pre>
 
 Create some YAML data in /tmp/hiera/data/common.yaml
 
-<pre>
+<code>
 ---
 messages1:
-  resource title 1:
-    message: this is the first message stored in YAML
-  resource title 2:
-    message: this is the second message stored in YAML
-  resource title 3:
-    message: this is the third message stored in YAML
-</pre>
+  notify:
+    title 1:
+      message: this is the first message stored in YAML
+    title 2:
+      message: this is the second message stored in YAML
+    title 3:
+      message: this is the third message stored in YAML
+</code>
 
 Creating Puppet resources from the YAML backend
 ======================================
 
 Create a simple puppet manifest
 <pre>
-$ echo "hiera_resources('notify', 'messages1')" > /tmp/yaml.pp
+$ echo "hiera_resources('messages1')" > /tmp/yaml.pp
 </pre>
 
 Now apply the manifest
@@ -64,33 +73,38 @@ Creating Puppet resources from the Redis backend
 
 Make sure Redis is running on localhost:6379
 
-Fire up irb or pry to add a JSON serialized hash into Redis
+Fire up your favorite ruby REPL and a few serialized Puppet resources
+into a Redis key.
 
 <pre>
 require 'redis'
 require 'json'
 
-messages = {
-  'resource title 1' => { 'message' => 'This is the first message stored in Redis.' },
-  'resource title 2' => { 'message' => 'This is the second message stored in Redis.' },
-  'resource title 3' => { 'message' => 'This is the third message stored in Redis.' }
+resources = { 'notify' => {
+  'title 1' => {
+    'message' => 'This is the first message.'
+    },
+  'title 2' => {
+    'message' => 'This is the second message.'
+    }
+  }
 }
 
 r = Redis.new
-r.set 'common:messages2', messages.to_json
+r.set 'common:messages2', resources.to_json
 </pre>
 
 Configure deserialization in ~/.puppet/hiera.yaml (use :yaml instead of
 :json if appropriate).
-<pre>
+<code>
 :redis:
   :deserialize: :json
-</pre>
+</code>
 
 Create a simple Puppet manifest
 
 <pre>
-$ echo "hiera_resources_redis('notify', 'messages2')" > /tmp/redis.pp
+$ echo "hiera_resources_redis('messages2')" > /tmp/redis.pp
 </pre>
 
 Now apply the manifest
