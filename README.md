@@ -49,8 +49,6 @@ messages1:
       message: this is the first message stored in YAML
     title 2:
       message: this is the second message stored in YAML
-    title 3:
-      message: this is the third message stored in YAML
 </pre>
 
 Creating Puppet resources from the YAML backend
@@ -76,10 +74,10 @@ require 'json'
 
 resources = { 'notify' => {
   'title 1' => {
-    'message' => 'This is the first message.'
+    'message' => 'This is the first message stored in Redis.'
     },
   'title 2' => {
-    'message' => 'This is the second message.'
+    'message' => 'This is the second message stored in Redis.'
     }
   }
 }
