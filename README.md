@@ -55,9 +55,11 @@ Creating Puppet resources from the YAML backend
 ======================================
 
 Create a simple puppet manifest
+
     $ echo "hiera_resources('messages1')" > /tmp/yaml.pp
 
 Now apply the manifest
+
     $ puppet apply /tmp/yaml.pp
 
 Creating Puppet resources from the Redis backend
@@ -94,9 +96,11 @@ Configure deserialization in ~/.puppet/hiera.yaml (use :yaml instead of
 </pre>
 
 Create a simple Puppet manifest
+
     $ echo "hiera_resources_redis('messages2')" > /tmp/redis.pp
 
 Now apply the manifest
+
     $ puppet apply /tmp/redis.pp
 
 Additional features
