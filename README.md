@@ -1,7 +1,7 @@
 Overview
 ========
 
-hiera_resources has 1 job in life; create Puppet resources from a hash returned by Hiera. The hash returned should match the structure of the hash required by Puppet's [create_resources]{http://docs.puppetlabs.com/references/latest/function.html#createresources} function. Examples for using this with YAML and Redis (serialized) backends are included below.
+hiera_resources has 1 job in life; create Puppet resources from a hash returned by Hiera. The hash returned should match the structure of the hash required by Puppet's [create_resources](http://docs.puppetlabs.com/references/latest/function.html#createresources) function. Examples for using this with YAML and Redis (serialized) backends are included below.
 
 Credit
 ======
@@ -14,9 +14,9 @@ Setup for both YAML and Redis backends
 
 Ensure the following gem versions are installed:
 
-  - [hiera]{http://rubygems.org/gems/hiera} gem >= 1.0.0
-  - [hiera-puppet]{http://rubygems.org/gems/hiera-puppet} >= 1.0.0
-  - [hiera-redis]{http://rubygems.org/gems/hiera-redis} >= 1.0.0 (coming soon...)
+  - [hiera](http://rubygems.org/gems/hiera) gem >= 1.0.0
+  - [hiera-puppet](http://rubygems.org/gems/hiera-puppet) >= 1.0.0
+  - [hiera-redis](http://rubygems.org/gems/hiera-redis) >= 1.0.0 (coming soon...)
 
 This function should exist in a place where puppet can find it.
 ~/.puppet/var/lib/puppet/parser/functions is certainly fine for testing
@@ -89,8 +89,7 @@ r = Redis.new
 r.set 'common:messages2', resources.to_json
 </pre>
 
-Configure deserialization in ~/.puppet/hiera.yaml (use :yaml instead of
-:json if appropriate).
+Configure deserialization in ~/.puppet/hiera.yaml (use :yaml instead of :json if appropriate).
 <pre>
 :redis:
   :deserialize: :json
