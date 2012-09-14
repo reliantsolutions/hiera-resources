@@ -1,28 +1,22 @@
 Overview
 ========
 
-hiera_resources has 1 job in life; create Puppet resources from a hash returned by Hiera
-
-This document will cover using this function with 2 Hiera backends:
-  - yaml
-  - redis (hashes must be serialized using JSON or YAML)
+hiera_resources has 1 job in life; create Puppet resources from a hash returned by Hiera. The hash returned should match the structure of the hash required by Puppet's [create_resources]{http://docs.puppetlabs.com/references/latest/function.html#createresources} function. Examples for using this with YAML and Redis (serialized) backends are included below.
 
 Credit
 ======
 
 This version of hiera_resources is basically a complete refactoring
-based on this excellent blog post by Robin Bowes.
-
-http://yo61.com/assigning-resources-to-nodes-with-hiera-in-puppet.html
+based on this excellent [blog post by Robin Bowes]{http://yo61.com/assigning-resources-to-nodes-with-hiera-in-puppet.html}.
 
 Setup for both YAML and Redis backends
 =======================================
 
 Ensure the following gem versions are installed:
 
-  - hiera gem >= 1.0.0
-  - hiera-puppet >= 1.0.0
-  - hiera-redis >= 1.0.0 (coming soon...)
+  - [hiera]{http://rubygems.org/gems/hiera} gem >= 1.0.0
+  - [hiera-puppet]{http://rubygems.org/gems/hiera-puppet} >= 1.0.0
+  - [hiera-redis]{http://rubygems.org/gems/hiera-redis} >= 1.0.0 (coming soon...)
 
 This function should exist in a place where puppet can find it.
 ~/.puppet/var/lib/puppet/parser/functions is certainly fine for testing
@@ -74,7 +68,7 @@ Creating Puppet resources from the Redis backend
 Make sure Redis is running on localhost:6379 (or tweak the call to
 Redis.new below)
 
-Fire up your favorite ruby REPL and a few serialized Puppet resources
+Fire up your favorite ruby REPL and add a few serialized Puppet resources
 into a Redis key.
 
 <pre>
@@ -115,4 +109,4 @@ notice: /Stage[main]//Notify[title 1]/message: defined 'message' as 'This is the
 Additional features
 ===================
 
-hiera_resources will accept a hash as a 3rd argument. When present, the hash will be used as a default if the key can not be found.
+hiera_resources will accept a hash as a 2nd argument. When present, the hash will be used as a default if the key can not be found.
