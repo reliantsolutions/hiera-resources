@@ -14,9 +14,9 @@ Setup for both YAML and Redis backends
 
 Ensure the following gem versions are installed:
 
-  - [hiera](http://rubygems.org/gems/hiera) gem >= 1.0.0
+  - [hiera](http://rubygems.org/gems/hiera) >= 1.0.0
   - [hiera-puppet](http://rubygems.org/gems/hiera-puppet) >= 1.0.0
-  - [hiera-redis](http://rubygems.org/gems/hiera-redis) >= 1.0.0 (coming soon...)
+  - [hiera-redis](http://rubygems.org/gems/hiera-redis) >= 1.0.0
 
 This function should exist in a place where puppet can find it.
 ~/.puppet/var/lib/puppet/parser/functions is certainly fine for testing
