@@ -7,7 +7,7 @@ Credit
 ======
 
 This version of hiera_resources is basically a complete refactoring
-based on this excellent [blog post by Robin Bowes](http://yo61.com/assigning-resources-to-nodes-with-hiera-in-puppet.html).
+based on this excellent [blog post by Robin Bowes](http://blog.yo61.com/assigning-resources-to-nodes-with-hiera-in-puppet/).
 
 Setup for both YAML and Redis backends
 =======================================
